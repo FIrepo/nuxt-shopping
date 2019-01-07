@@ -1,5 +1,10 @@
 # 一个 Webpack + Nuxt + MongoDB + redis 的 nuxt-shopping app
 
+## 启动运行
+1、把mongodb运行起来：sudo mongod<br/>
+2、把redis运行起来：redis-server<br/>
+3、项目运行：npm run dev<br/>
+
 ## 想到什么写什么
 node本身不支持import，解决这个问题<br/>
 在此之前首先确保全局安装了babel-cli<br/>

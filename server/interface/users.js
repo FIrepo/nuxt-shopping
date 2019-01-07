@@ -1,4 +1,4 @@
-import Router from 'koa-router';
+import Router from 'koa-router'
 import Redis from 'koa-redis'
 // 邮箱直接发送邮件
 import nodeMailer from 'nodemailer'
@@ -20,7 +20,7 @@ router.post('/signup', async (ctx) => {
     password,
     email,
     code
-  } = ctx.request.body;
+  } = ctx.request.body
 
   if (code) {
     // redis中的登陆者

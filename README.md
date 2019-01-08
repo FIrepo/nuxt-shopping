@@ -1,4 +1,5 @@
 # 一个 Webpack + Nuxt + MongoDB + redis 的 nuxt-shopping app
+一个模仿美团网的webapp，仅供我自己学习，没有其他意思。<br/>
 
 ## 启动运行
 1、把mongodb运行起来：sudo mongod<br/>

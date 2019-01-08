@@ -47,7 +47,7 @@
 import CryptoJS from 'crypto-js'
 
 export default {
-  data() {
+  data () {
     return {
       statusMsg: '',
       error: '',
@@ -98,7 +98,7 @@ export default {
   },
   layout: 'blank',
   methods: {
-    sendMsg() {
+    sendMsg () {
       const self = this;
       let namePass
       let emailPass
@@ -143,7 +143,7 @@ export default {
         })
       }
     },
-    register() {
+    register () {
       let self = this;
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {

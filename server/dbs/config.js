@@ -1,6 +1,6 @@
 export default {
   // mongodb配置
-  dbs: 'mongodb://127.0.0.1:27017/student',
+  dbs: 'mongodb://47.107.148.235:27017/nuxt-shopping',
   // redis配置
   redis: {
     get host() {

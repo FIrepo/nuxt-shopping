@@ -2,40 +2,40 @@ import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 const Poi = new Schema({
   name: {
-    type: String //景点名
+    type: String // 景点名
   },
   province: {
-    type: String
+    type: String // 省
   },
   city: {
-    type: String
+    type: String // 市
   },
   county: {
-    type: String
+    type: String // 区
   },
   areaCode: {
-    type: String
+    type: String //区号
   },
   tel: {
-    type: String
+    type: String // 电话
   },
   area: {
-    type: String
+    type: String // 商圈
   },
   addr: {
-    type: String
+    type: String // 地址
   },
   type: {
-    type: String
+    type: String // 类型
   },
   module: {
-    type: String
+    type: String // 子分类
   },
   longitude: {
-    type: Number
+    type: Number // 经度
   },
   latitude: {
-    type: Number
+    type: Number // 纬度
   }
 })
 

@@ -1,6 +1,8 @@
 import Router from 'koa-router'
 import axios from './utils/axios'
 import Province from '../dbs/models/province'
+import Menu from '../dbs/models/menu'
+import City from '../dbs/models/city'
 
 let router = new Router({
   prefix: '/geo'
@@ -174,27 +176,27 @@ router.get('/hotCity', async (ctx) => {
 // 左侧分类菜单
 router.get('/menu', async (ctx) => {
   // 本地数据库数据
-  // const result = await Menu.findOne()
-  // ctx.body = {
-  //   menu: result.menu
-  // }
+  const result = await Menu.findOne()
+  ctx.body = {
+    menu: result.menu
+  }
 
   // 线上数据
-  let {
-    status,
-    data: {
-      menu
-    }
-  } = await axios.get(`http://cp-tools.cn/geo/menu?sign=${sign}`);
-  if (status === 200) {
-    ctx.body = {
-      menu
-    }
-  } else {
-    ctx.body = {
-      menu: []
-    }
-  }
+  // let {
+  //   status,
+  //   data: {
+  //     menu
+  //   }
+  // } = await axios.get(`http://cp-tools.cn/geo/menu?sign=${sign}`);
+  // if (status === 200) {
+  //   ctx.body = {
+  //     menu
+  //   }
+  // } else {
+  //   ctx.body = {
+  //     menu: []
+  //   }
+  // }
 })
 
 export default router

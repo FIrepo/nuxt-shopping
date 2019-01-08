@@ -19,23 +19,23 @@
           <dl v-if="isHotPlace" class="hotPlace">
             <dt>热门搜索</dt>
             <dd
-              v-for="(item, idx) in hotPlace"
+              v-for="(item, idx) in $store.state.home.hotPlace.slice(0, 5)"
               :key="idx"
-            >{{ item }}</dd>
+            >{{ item.name }}</dd>
           </dl>
           <dl v-if="isSearchList" class="searchList">
             <dd
               v-for="(item, idx) in searchList"
               :key="idx"
-            >{{ item }}</dd>
+            >{{ item.name }}</dd>
           </dl>
         </div>
         <p class="suggset">
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
-          <a href="#">故宫博物院</a>
+          <a
+            v-for="(item, idx) in $store.state.home.hotPlace.slice(0, 5)"
+            :key="idx"
+            href="#"
+          > {{ item.name }} </a>
         </p>
         <ul class="nav">
           <li>
@@ -67,13 +67,17 @@
 </template>
 
 <script>
+// 输入框延时函数
+import _ from 'lodash'
+import { async } from 'q';
+
 export default {
   data () {
     return {
       search: '',
       isFocus: false,
-      hotPlace: ['火锅', '火锅', '火锅'],
-      searchList: ['烤鱼', '烤鱼', '烤鱼']
+      hotPlace: [],
+      searchList: []
     }
   },
   computed: {
@@ -93,9 +97,21 @@ export default {
         this.isFocus = false
       }, 200)
     },
-    input () {
-      console.log('input')
-    }
+    // 输入框输入文字，延迟300毫秒进行搜索
+    input: _.debounce (async function () {
+      let self = this
+      // 把‘市’字去掉
+      let city = self.$store.state.geo.position.city.replace('市', '')
+      self.searchList = []
+      let {status, data: {top}} = await self.$axios.get('/search/top', {
+        params: {
+          input: self.search,
+          city
+        }
+      })
+      // 截取10条
+      self.searchList = top.slice(0, 10)
+    }, 300)
   }
 }
 </script>

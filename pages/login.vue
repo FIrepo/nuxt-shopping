@@ -27,7 +27,7 @@
 import CryptoJS from 'crypto-js'
 
 export default {
-  data: () => {
+  data () {
     return {
       checked: '',
       username: '',
@@ -37,7 +37,7 @@ export default {
   },
   layout: 'blank',
   methods: {
-    login() {
+    login () {
       let self = this;
       self.$axios.post('/users/signin', {
         username: window.encodeURIComponent(self.username),

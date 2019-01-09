@@ -10,6 +10,7 @@ const sign = 'c6a3d36c8d43371e21550e1420f0d19e'
 
 // 搜索接口
 router.get('/top', async (ctx) => {
+  // 本地数据
   // try {
   //   let top = await Poi.find({
   //     'name': new RegExp(ctx.query.input),
@@ -31,6 +32,8 @@ router.get('/top', async (ctx) => {
   //     top: []
   //   }
   // }
+
+  // 线上数据
   let {
     status,
     data: {
@@ -51,6 +54,7 @@ router.get('/top', async (ctx) => {
 
 // 热门搜索接口
 router.get('/hotPlace', async (ctx) => {
+  // 本地数据
   // let city = ctx.store ? ctx.store.geo.position.city : ctx.query.city
   // try {
   //   let result = await Poi.find({
@@ -73,6 +77,8 @@ router.get('/hotPlace', async (ctx) => {
   //     result: []
   //   }
   // }
+
+  // 线上数据
   let city = ctx.store ?
     ctx.store.geo.position.city :
     ctx.query.city
@@ -95,6 +101,7 @@ router.get('/hotPlace', async (ctx) => {
 
 // 首页下面的关键词搜索
 router.get('/resultsByKeywords', async (ctx) => {
+  // 线上数据
   const {
     city,
     keyword
@@ -115,8 +122,39 @@ router.get('/resultsByKeywords', async (ctx) => {
   ctx.body = {
     count: status === 200 ? count : 0,
     pois: status === 200 ?
-      pois :
-      []
+      pois : []
+  }
+})
+
+// 商品详情页的数据
+router.get('/products', async (ctx) => {
+  let keyword = ctx.query.keyword || '旅游'
+  let city = ctx.query.city || '北京'
+  let {
+    status,
+    data: {
+      product,
+      more
+    }
+  } = await axios.get('http://cp-tools.cn/search/products', {
+    params: {
+      keyword,
+      city,
+      sign
+    }
+  })
+  if (status === 200) {
+    ctx.body = {
+      product,
+      more: ctx.isAuthenticated() ? more : [],
+      login: ctx.isAuthenticated()
+    }
+  } else {
+    ctx.body = {
+      product: {},
+      more: ctx.isAuthenticated() ? more : [],
+      login: ctx.isAuthenticated()
+    }
   }
 })
 

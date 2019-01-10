@@ -29,7 +29,10 @@ app.proxy = true
 app.use(session({
   key: 'mt',
   prefix: 'mt:uid',
-  store: new Redis()
+  store: new Redis({
+    host: dbConfig.redis.host,
+    port: dbConfig.redis.port
+  })
 }))
 app.use(bodyParser({
   extendTypes: ['json', 'form', 'text']

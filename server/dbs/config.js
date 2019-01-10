@@ -4,7 +4,7 @@ export default {
   // redis配置
   redis: {
     get host() {
-      return '127.0.0.1'
+      return '47.107.148.235'
     },
     get port() {
       return 6379

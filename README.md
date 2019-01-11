@@ -16,3 +16,7 @@ node本身不支持import，解决这个问题<br/>
 接口签名：<br/>
 接口签名获取网址：http://cp-tools.cn/sign<br/>
 c6a3d36c8d43371e21550e1420f0d19e<br/>
+
+## 使用pm2部署报错
+pm2.yml文件已经配置了使用babel-node编译，还是报错不能使用import语法<br/>
+不知道怎么解决，以后知道了再说

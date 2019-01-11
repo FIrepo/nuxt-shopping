@@ -11,7 +11,10 @@ let router = new Router({
   prefix: '/users'
 })
 
-let Store = new Redis().client
+let Store = new Redis({
+  host: Email.redis.host,
+  port: Email.redis.port
+}).client
 
 // 注册
 router.post('/signup', async (ctx) => {
@@ -141,10 +144,13 @@ router.post('/verify', async (ctx, next) => {
     user: ctx.request.body.username
   }
   let mailOptions = {
-    from: `"认证邮件" <${Email.smtp.user}>`,
+    from: `"美团网（imitate by Shen）" <${Email.smtp.user}>`,
     to: ko.email,
-    subject: 'nuxt-shopping app注册码',
-    html: `您在nuxt-shopping app中注册，您的邀请码是${ko.code}`
+    subject: '欢迎注册美团网（imitate by Shen）',
+    html: `您在Nuxt Shopping App中注册，您的邀请码是${ko.code}
+            欢迎访问我的github：https://github.com/shauryshen
+            欢迎访问我的个人博客：http://shauryshen.top
+          `
   }
   await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {

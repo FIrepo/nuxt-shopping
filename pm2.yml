@@ -1,0 +1,11 @@
+apps:
+  - script: ./server/index.js
+    name: nuxt-shopping
+    watch: true
+    exec_interpreter: babel-node
+    exec_mode: fork
+    env_production:
+      NODE_ENV: production
+      HOST: localhost
+      PORT: 8887
+    log_date_format: YYYY - MM - DD HH: mm Z
